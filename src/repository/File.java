@@ -3,7 +3,7 @@ package src.repository;
 import java.io.*;
 
 public class File {
-    public void createFile(){
+    public static void createFile(){
     java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
         try (FileWriter fw = new FileWriter(file);
              BufferedWriter bw = new BufferedWriter(fw)){
