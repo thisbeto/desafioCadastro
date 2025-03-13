@@ -7,7 +7,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        File.createFile();
+        File file = new File();
+        file.createFile();
+        file.readFile();
         Scanner input;
         int option = 0;
         boolean validInput;
@@ -20,6 +22,7 @@ public class Main {
             System.out.println("5. Listar pets por algum critério (idade, nome, raça)");
             System.out.println("6. Sair");
             System.out.println("Escolha uma opção: ");
+
             do {
                 validInput = true;
                 try {
@@ -31,7 +34,10 @@ public class Main {
                     break;
                 }
             } while (!validInput);
+
             if (option == 1) {
+                System.out.println();
+                file.readFile();
                 System.out.println("Funfou");
             }
 
