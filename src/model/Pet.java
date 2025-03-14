@@ -4,8 +4,8 @@ import src.Exception.InvalidPetException;
 
 public class Pet {
     String petName;
-    int petType;
-    String petGender;
+    PetType petType;
+    PetGender petGender;
     PetAddress address;
     float petAge;
     float petWeight;
@@ -23,31 +23,15 @@ public class Pet {
 
     }
 
-    public int getPetType() {
-        return petType;
-    }
-
-    public void setPetType(int petType) throws InvalidPetException {
+    public void setPetType(PetType petType) {
         this.petType = petType;
-        PetType cachorro = PetType.CACHORRO;
-        PetType gato = PetType.GATO;
-        if (petType == 1) {
-            System.out.println(cachorro.getPetTypePrint());
-        } else if (petType == 2) {
-            System.out.println(gato.getPetTypePrint());
-        }
-
-    }
-
-    public String getPetGender() {
-        return petGender;
-    }
-
-    public void setPetGender(String petGender) {
-        this.petGender = petGender;
     }
 
     public PetAddress getAddress() {
+        return address;
+    }
+
+    public PetAddress getAddress(int i) {
         return address;
     }
 

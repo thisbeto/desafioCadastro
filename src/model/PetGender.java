@@ -4,25 +4,25 @@ import src.Exception.InvalidPetException;
 
 import java.util.InputMismatchException;
 
-public enum PetType {
-    CACHORRO(1,"Cachorro"),
-    GATO(2,"Gato");
+public enum PetGender {
+    MACHO(1,"Macho"),
+    FEMEA(2,"Fêmea");
 
     public final String petTypePrint;
     public final int petTypeCode;
 
-    PetType (int petTypeCode, String petTypePrint) {
+    PetGender(int petTypeCode, String petTypePrint) {
         this.petTypePrint = petTypePrint;
         this.petTypeCode = petTypeCode;
     }
 
-    public static PetType fromCodigo(int petTypeNumber) throws InvalidPetException, InputMismatchException {
-        for (PetType type: PetType.values()) {
+    public static PetGender fromCodigo(int petTypeNumber) throws InvalidPetException, InputMismatchException {
+        for (PetGender type: PetGender.values()) {
             if (type.petTypeCode == petTypeNumber) {
                 return type;
             }
         }
-        throw new InvalidPetException("Tipo de animal inválido: " +petTypeNumber);
+        throw new InvalidPetException("Tipo de gênero inválido: " +petTypeNumber);
     }
 
 
