@@ -13,16 +13,38 @@ public class File {
             throw new RuntimeException(e);
         }
     }
+
     public void readFile() {
         java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
-        try(FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr)){
+        try (FileReader fr = new FileReader(file);
+             BufferedReader br = new BufferedReader(fr)) {
             String linha;
-            while((linha = br.readLine()) != null) {
+            while ((linha = br.readLine()) != null) {
                 System.out.println(linha);
             }
-        } catch (IOException e){
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String readSpecifyLineFile(int line) {
+        java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
+        try (FileReader fr = new FileReader(file);
+             BufferedReader br = new BufferedReader(fr)) {
+            String linha;
+            int cont = 1;
+            while ((linha = br.readLine()) != null) {
+                if (cont == line) {
+                    System.out.println(linha);
+                    return linha;
+                }
+                cont++;
+            }
+            return linha;
+
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 }
+

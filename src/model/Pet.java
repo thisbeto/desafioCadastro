@@ -1,8 +1,10 @@
 package src.model;
 
+import src.Exception.InvalidPetException;
+
 public class Pet {
     String petName;
-    String petType;
+    int petType;
     String petGender;
     PetAddress address;
     float petAge;
@@ -13,16 +15,28 @@ public class Pet {
         return petName;
     }
 
-    public void setPetName(String petName) {
+    public void setPetName(String petName) throws InvalidPetException {
         this.petName = petName;
+        if (petName == null || petName.trim().isEmpty() || !petName.contains(" ") || !petName.matches("[A-Za-z ]+")){
+            throw new InvalidPetException("O pet deve ter um nome e um sobrenome.");
+        }
+
     }
 
-    public String getPetType() {
+    public int getPetType() {
         return petType;
     }
 
-    public void setPetType(String petType) {
+    public void setPetType(int petType) throws InvalidPetException {
         this.petType = petType;
+        PetType cachorro = PetType.CACHORRO;
+        PetType gato = PetType.GATO;
+        if (petType == 1) {
+            System.out.println(cachorro.getPetTypePrint());
+        } else if (petType == 2) {
+            System.out.println(gato.getPetTypePrint());
+        }
+
     }
 
     public String getPetGender() {
