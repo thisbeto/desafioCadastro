@@ -71,17 +71,39 @@ public class Main {
                 System.out.println("Cidade: ");
                 try {
                     petAddress.setCity(input.nextLine());
-                    input.nextLine();
 
                 } catch (IllegalArgumentException | InputMismatchException e) {
                     System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
+                    continue;
                 }
 
                 System.out.println("Rua: ");
                 try {
                     petAddress.setStreet(input.nextLine());
-                    input.nextLine();
 
+                } catch (IllegalArgumentException | InputMismatchException e) {
+                    System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
+                }
+
+
+                File.readSpecifyLineFile(5);
+                try {
+                    pet.setPetAge(input.nextFloat());
+                } catch (IllegalArgumentException | InputMismatchException e) {
+                    System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
+                }
+
+                File.readSpecifyLineFile(6);
+                try {
+                    pet.setPetWeight(input.nextFloat());
+                } catch (IllegalArgumentException | InputMismatchException e) {
+                    System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
+                }
+                System.out.println(pet.getPetWeight());
+
+                File.readSpecifyLineFile(7);
+                try {
+                    pet.setPetBreed(input.nextLine());
                 } catch (IllegalArgumentException | InputMismatchException e) {
                     System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
                 }

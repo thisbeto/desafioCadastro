@@ -23,6 +23,7 @@ public enum PetGender {
             }
         }
         throw new InvalidPetException("Tipo de gênero inválido: " +petTypeNumber);
+
     }
 
 
