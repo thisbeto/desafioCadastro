@@ -1,14 +1,13 @@
 package src.repository;
 
-import src.main.Main;
+
 import src.model.Pet;
-import src.model.PetAddress;
 
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class File {
+public class FileRepository {
 
     public void createFile() {
         java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
@@ -54,28 +53,48 @@ public class File {
         }
     }
 
-    public void savePetFile(Pet pet, PetAddress petAddress) {
-        Main main = new Main();
+    public void savePetFile(Pet pet) {
+        // Formatando o nome do pet para maiúsculas e removendo espaços
+        String nomeFormatado = pet.getPetName().replace(" ", "").toUpperCase();
+
+        // Pegando a data e hora atual
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
         String dataHoraFormatada = agora.format(formatter);
 
-        String name = pet.getPetName();
-        String type = String.valueOf(pet.getPetType());
-        String gender = String.valueOf(pet.getPetGender());
-        String address = String.valueOf(pet.getAddress());
-        String age = String.valueOf(pet.getPetAge());
-        String weight = String.valueOf(pet.getPetWeight());
-        String breed = String.valueOf(pet.getPetBreed());
+        String nomeArquivo = dataHoraFormatada + "-" + nomeFormatado + ".TXT";
+
+        File diretorio = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
+        if (!diretorio.exists()) {
+            if (diretorio.mkdirs()) {
+                System.out.println("Diretório criado com sucesso");
+            } else {
+                System.out.println("Falha ao criar diretório.");
+                return;
+            }
+        } else {
+            System.out.println("Diretório já existe");
+        }
 
 
-        System.out.println("Nome do pet: " + name);
-        System.out.println("Tipo do pet: " + type);
-        System.out.println("Gênero do pet: " + gender);
-        System.out.println("Endereço do pet: " + address);
-        System.out.println("Idade do pet: " + age);
-        System.out.println("Peso do pet: " + weight);
-        System.out.println("Raça do pet: " + breed);
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados\\" + nomeArquivo))) {
+            bw.write("1 - " + pet.getPetName());
+            bw.newLine();
+            bw.write("2 - " + pet.getPetType());
+            bw.newLine();
+            bw.write("3 - " + pet.getPetGender());
+            bw.newLine();
+            bw.write("4 - " + pet.getAddress().getStreet() + ", " + pet.getAddress().getHouseNumber() + ", " + pet.getAddress().getCity());
+            bw.newLine();
+            bw.write("5 - " + pet.getPetAge() + " anos");
+            bw.newLine();
+            bw.write("6 - " + pet.getPetWeight() + "kg");
+            bw.newLine();
+            bw.write("7 - " + pet.getPetBreed());
+            bw.newLine();
+        } catch (IOException e) {
+            System.out.println("Erro ao criar ou escrever no arquivo: " + e.getMessage());
+        }
 
     }
 

@@ -1,9 +1,5 @@
 package src.model;
 
-import src.Exception.InvalidPetException;
-
-import java.util.InputMismatchException;
-
 public enum PetType {
     CACHORRO("Cachorro"),
     GATO("Gato");

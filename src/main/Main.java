@@ -1,7 +1,7 @@
 package src.main;
 
 import src.model.PetAddress;
-import src.repository.File;
+import src.repository.FileRepository;
 import src.services.CadastrarPet;
 import src.services.PrintMenu;
 
@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        File file = new File();
+        FileRepository file = new FileRepository();
         PetAddress petAddress = new PetAddress();
         file.createFile();
         file.readFile();

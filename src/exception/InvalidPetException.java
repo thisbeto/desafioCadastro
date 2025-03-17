@@ -1,4 +1,4 @@
-package src.Exception;
+package src.exception;
 
 public class InvalidPetException extends Exception {
     public InvalidPetException(String message) {

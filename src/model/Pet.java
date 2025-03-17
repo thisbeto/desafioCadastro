@@ -1,6 +1,6 @@
 package src.model;
 
-import src.Exception.InvalidPetException;
+import src.exception.InvalidPetException;
 
 public class Pet {
     String petName;
@@ -54,12 +54,6 @@ public class Pet {
     }
 
     public void setPetWeight(float petWeight) {
-        if (petWeight > 60) {
-            throw new IllegalArgumentException("O peso do pet não pode ser maior do que 60kg");
-        }
-        if (petWeight < 0.5) {
-            throw new IllegalArgumentException("O peso do pet não pode ser maior do que 60kg");
-        }
         this.petWeight = petWeight;
     }
 

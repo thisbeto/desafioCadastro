@@ -1,11 +1,11 @@
 package src.services;
 
-import src.Exception.InvalidPetException;
+import src.exception.InvalidPetException;
 import src.model.Pet;
 import src.model.PetAddress;
 import src.model.PetGender;
 import src.model.PetType;
-import src.repository.File;
+import src.repository.FileRepository;
 import src.utils.ValidatorUtils;
 
 import java.util.InputMismatchException;
@@ -15,11 +15,12 @@ public class CadastrarPet {
     public void cadastrarPet() {
         Scanner input = new Scanner(System.in);
         Pet pet = new Pet();
+        FileRepository fileRepository = new FileRepository();
         PetAddress petAddress = new PetAddress();
         ValidatorUtils validatorUtils = new ValidatorUtils();
 
         // PERGUNTA 1 - NOME E SOBRENOME
-        File.readSpecifyLineFile(1);
+        FileRepository.readSpecifyLineFile(1);
         try {
             pet.setPetName(validatorUtils.lerNomeValido(input));
         } catch (InvalidPetException e) {
@@ -27,7 +28,7 @@ public class CadastrarPet {
         }
 
         // PERGUNTA 2 - TIPO ANIMAL
-        File.readSpecifyLineFile(2);
+        FileRepository.readSpecifyLineFile(2);
         while (true) {
             try {
                 System.out.println("1 = Cachorro | 2 = Gato");
@@ -47,7 +48,7 @@ public class CadastrarPet {
         }
 
         // PERGUNTA 3 - GENERO ANIMAL
-        File.readSpecifyLineFile(3);
+        FileRepository.readSpecifyLineFile(3);
         while (true) {
             System.out.println("1 = Macho | 2 = Fêmea");
             int escolha = validatorUtils.lerNValido(input);
@@ -65,13 +66,13 @@ public class CadastrarPet {
 
 
         // PERGUNTA 4 - ENDEREÇO ENCONTRADO
-        File.readSpecifyLineFile(4);
+        FileRepository.readSpecifyLineFile(4);
         System.out.println("Número da casa: ");
 
         try {
             petAddress.setHouseNumber(validatorUtils.lerNValido(input));
 
-        } catch (IllegalArgumentException | InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
         }
 
@@ -79,7 +80,7 @@ public class CadastrarPet {
         try {
             petAddress.setCity(input.nextLine());
 
-        } catch (IllegalArgumentException | InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
         }
 
@@ -87,38 +88,39 @@ public class CadastrarPet {
         try {
             petAddress.setStreet(input.nextLine());
 
-        } catch (IllegalArgumentException | InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
         }
 
         // PERGUNTA 5 - IDADE APROXIAMDA
-        File.readSpecifyLineFile(5);
+        FileRepository.readSpecifyLineFile(5);
         try {
             pet.setPetAge(validatorUtils.lerIdadeValido(input));
-        } catch (IllegalArgumentException | InputMismatchException e) {
+        } catch (InputMismatchException e) {
             System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
         }
 
         // PERGUNTA 6 - PESO
-        File.readSpecifyLineFile(6);
+        FileRepository.readSpecifyLineFile(6);
         try {
-            pet.setPetWeight(input.nextFloat());
+            pet.setPetWeight(validatorUtils.lerPesoValido(input));
         } catch (IllegalArgumentException | InputMismatchException e) {
             System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
         }
 
         // PERGUNTA 7 - RAÇA
-        File.readSpecifyLineFile(7);
+        FileRepository.readSpecifyLineFile(7);
         try {
-            pet.setPetBreed(input.next());
+            input.nextLine();
+            String breed = input.nextLine();
+            pet.setPetBreed(breed);
         } catch (IllegalArgumentException | InputMismatchException e) {
             System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
         }
 
-
         pet.setAddress(petAddress);
 
-
+        fileRepository.savePetFile(pet);
         System.out.println(pet.toString());
 
     }
