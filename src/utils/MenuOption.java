@@ -1,6 +1,4 @@
-package src.repository;
-
-import java.util.Scanner;
+package src.utils;
 
 public class MenuOption {
     public static String numberInRange(String number) {

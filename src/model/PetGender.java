@@ -5,30 +5,17 @@ import src.Exception.InvalidPetException;
 import java.util.InputMismatchException;
 
 public enum PetGender {
-    MACHO(1,"Macho"),
-    FEMEA(2,"Fêmea");
+    MACHO("Macho"),
+    FEMEA("Fêmea");
 
-    public final String petTypePrint;
-    public final int petTypeCode;
+    private final String descricao;
 
-    PetGender(int petTypeCode, String petTypePrint) {
-        this.petTypePrint = petTypePrint;
-        this.petTypeCode = petTypeCode;
+    PetGender(String descricao) {
+        this.descricao = descricao;
     }
 
-    public static PetGender fromCodigo(int petTypeNumber) throws InvalidPetException, InputMismatchException {
-        for (PetGender type: PetGender.values()) {
-            if (type.petTypeCode == petTypeNumber) {
-                return type;
-            }
-        }
-        throw new InvalidPetException("Tipo de gênero inválido: " +petTypeNumber);
-
+    @Override
+    public String toString() {
+        return descricao;
     }
-
-
-    public String getPetTypePrint() {
-        return this.petTypePrint;
-    }
-
 }

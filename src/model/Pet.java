@@ -46,9 +46,6 @@ public class Pet {
     }
 
     public void setPetAge(float petAge) {
-        if (petAge > 20) {
-            throw new IllegalArgumentException("A idade do pet não pode ser maior que 20 anos.");
-        }
         this.petAge = petAge;
     }
 
@@ -66,11 +63,36 @@ public class Pet {
         this.petWeight = petWeight;
     }
 
+    public void setPetGender(PetGender petGender) {
+        this.petGender = petGender;
+    }
+
+    @Override
+    public String toString() {
+        return "Pet{" +
+                "petName='" + petName + '\'' +
+                ", petType=" + petType +
+                ", petGender=" + petGender +
+                ", address=" + address +
+                ", petAge=" + petAge +
+                ", petWeight=" + petWeight +
+                ", petBreed='" + petBreed + '\'' +
+                '}';
+    }
+
     public String getPetBreed() {
         return petBreed;
     }
 
     public void setPetBreed(String petBreed) {
         this.petBreed = petBreed;
+    }
+
+    public PetType getPetType() {
+        return petType;
+    }
+
+    public PetGender getPetGender() {
+        return petGender;
     }
 }

@@ -5,6 +5,15 @@ public class PetAddress {
     public String city;
     public String street;
 
+    @Override
+    public String toString() {
+        return "PetAddress{" +
+                "houseNumber=" + houseNumber +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                '}';
+    }
+
     public int getHouseNumber() {
         return houseNumber;
     }

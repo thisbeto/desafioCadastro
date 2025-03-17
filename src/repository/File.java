@@ -1,8 +1,15 @@
 package src.repository;
 
+import src.main.Main;
+import src.model.Pet;
+import src.model.PetAddress;
+
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class File {
+
     public void createFile() {
         java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
         try (FileWriter fw = new FileWriter(file);
@@ -46,5 +53,32 @@ public class File {
             throw new RuntimeException(e);
         }
     }
+
+    public void savePetFile(Pet pet, PetAddress petAddress) {
+        Main main = new Main();
+        LocalDateTime agora = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
+        String dataHoraFormatada = agora.format(formatter);
+
+        String name = pet.getPetName();
+        String type = String.valueOf(pet.getPetType());
+        String gender = String.valueOf(pet.getPetGender());
+        String address = String.valueOf(pet.getAddress());
+        String age = String.valueOf(pet.getPetAge());
+        String weight = String.valueOf(pet.getPetWeight());
+        String breed = String.valueOf(pet.getPetBreed());
+
+
+        System.out.println("Nome do pet: " + name);
+        System.out.println("Tipo do pet: " + type);
+        System.out.println("Gênero do pet: " + gender);
+        System.out.println("Endereço do pet: " + address);
+        System.out.println("Idade do pet: " + age);
+        System.out.println("Peso do pet: " + weight);
+        System.out.println("Raça do pet: " + breed);
+
+    }
+
+
 }
 
