@@ -2,7 +2,7 @@ package src.model;
 
 public enum PetGender {
     MACHO("Macho"),
-    FEMEA("Fêmea");
+    FEMEA("Femea");
 
     private final String descricao;
 

@@ -121,7 +121,6 @@ public class CadastrarPet {
         pet.setAddress(petAddress);
 
         fileRepository.savePetFile(pet);
-        System.out.println(pet.toString());
 
     }
 

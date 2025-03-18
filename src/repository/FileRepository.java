@@ -62,7 +62,7 @@ public class FileRepository {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
         String dataHoraFormatada = agora.format(formatter);
 
-        String nomeArquivo = dataHoraFormatada + "-" + nomeFormatado + ".TXT";
+        String nomeArquivo = dataHoraFormatada + "-" + nomeFormatado + ".txt";
 
         File diretorio = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
         if (!diretorio.exists()) {
@@ -73,7 +73,7 @@ public class FileRepository {
                 return;
             }
         } else {
-            System.out.println("Diretório já existe");
+            System.out.println("");
         }
 
 

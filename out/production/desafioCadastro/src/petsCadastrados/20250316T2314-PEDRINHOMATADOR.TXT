@@ -1,7 +1,0 @@
-1 - pedrinho matador
-2 - Cachorro
-3 - Fêmea
-4 - paulista, 123, sao paulo
-5 - 15.0 anos
-6 - 12.0kg
-7 - dos
