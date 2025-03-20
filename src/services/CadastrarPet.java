@@ -1,6 +1,5 @@
 package src.services;
 
-import src.exception.InvalidPetException;
 import src.model.Pet;
 import src.model.PetAddress;
 import src.model.PetGender;
@@ -21,11 +20,8 @@ public class CadastrarPet {
 
         // PERGUNTA 1 - NOME E SOBRENOME
         FileRepository.readSpecifyLineFile(1);
-        try {
-            pet.setPetName(validatorUtils.lerNomeValido(input));
-        } catch (InvalidPetException e) {
-            System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
-        }
+        pet.setPetName(validatorUtils.lerNomeValido(input));
+
 
         // PERGUNTA 2 - TIPO ANIMAL
         FileRepository.readSpecifyLineFile(2);

@@ -1,7 +1,4 @@
 package src.utils;
-
-import src.exception.InvalidPetException;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -10,24 +7,24 @@ public class ValidatorUtils {
         try {
             String nomeFornecido = input.nextLine();
             return validarNome(nomeFornecido);
-        } catch (InvalidPetException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
             return lerNomeValido(input);
         }
     }
 
-    private String validarNome(String nome) throws InvalidPetException {
-        if (nome.trim().isEmpty() || !nome.contains(" ") || !nome.matches("[A-Za-z ]+")) {
-            throw new InvalidPetException("O pet deve ter um nome e um sobrenome.");
+    private String validarNome(String nome) {
+        if (nome == null || nome.trim().isEmpty() || !nome.contains(" ") || !nome.matches("[A-Za-z ]+")) {
+            throw new IllegalArgumentException("O pet deve ter um nome e um sobrenome.");
         }
-        return nome;
+        return nome.trim();
     }
 
     public int lerNValido(Scanner input) {
         try {
             System.out.print("Digite um número: ");
             int numValido = input.nextInt();
-            input.nextLine(); // Limpa o buffer após leitura válida
+            input.nextLine();
             return numValido;
         } catch (InputMismatchException e) {
             System.out.println("Entrada inválida! Digite um número inteiro.");
@@ -47,7 +44,7 @@ public class ValidatorUtils {
                     System.out.println("Idade inválida. Deve ser menor ou igual a 20.");
                     return lerIdadeValido(input);
                 }
-                return numValido; // Retorna a idade válida
+                return numValido;
             } else {
                 System.out.println("Erro: Entrada inválida! Digite um número.");
                 input.nextLine();

@@ -1,6 +1,5 @@
 package src.model;
 
-import src.exception.InvalidPetException;
 
 public class Pet {
     String petName;
@@ -11,18 +10,15 @@ public class Pet {
     float petWeight;
     String petBreed;
 
-    public static final String NAO_INFORMADO = "NÃO INFORMADO";
-
     public String getPetName() {
         return petName;
     }
 
-    public void setPetName(String petName) throws InvalidPetException {
-        this.petName = petName;
-        if (petName.trim().isEmpty() || !petName.contains(" ") || !petName.matches("[A-Za-z ]+")){
-            throw new InvalidPetException("O pet deve ter um nome e um sobrenome.");
+    public void setPetName(String petName) {
+        if (petName == null || petName.trim().isEmpty() || !petName.contains(" ") || !petName.matches("[A-Za-z ]+")) {
+            throw new IllegalArgumentException("O pet deve ter um nome e um sobrenome.");
         }
-
+        this.petName = petName;
     }
 
     public void setPetType(PetType petType) {
@@ -30,10 +26,6 @@ public class Pet {
     }
 
     public PetAddress getAddress() {
-        return address;
-    }
-
-    public PetAddress getAddress(int i) {
         return address;
     }
 
@@ -59,19 +51,6 @@ public class Pet {
 
     public void setPetGender(PetGender petGender) {
         this.petGender = petGender;
-    }
-
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "petName='" + petName + '\'' +
-                ", petType=" + petType +
-                ", petGender=" + petGender +
-                ", address=" + address +
-                ", petAge=" + petAge +
-                ", petWeight=" + petWeight +
-                ", petBreed='" + petBreed + '\'' +
-                '}';
     }
 
     public String getPetBreed() {

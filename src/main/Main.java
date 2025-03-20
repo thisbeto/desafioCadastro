@@ -1,18 +1,14 @@
 package src.main;
 
-import src.exception.InvalidPetException;
 import src.model.Pet;
-import src.model.PetAddress;
-import src.repository.FileDelete;
 import src.repository.FileRepository;
 import src.services.*;
 
-import java.io.File;
-import java.io.IOException;
+
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws InvalidPetException {
+    public static void main(String[] args) {
         FileRepository file = new FileRepository();
         file.createFile();
         file.readFile();

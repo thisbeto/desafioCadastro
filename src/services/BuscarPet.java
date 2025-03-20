@@ -10,25 +10,19 @@ import src.model.Pet;
 import src.model.PetGender;
 import src.model.PetType;
 import src.model.PetAddress;
-import src.exception.InvalidPetException;
 import src.utils.ValidatorUtils;
 
 public class BuscarPet {
 
     public ArrayList<Pet> buscarPet() {
-        // Definindo a pasta onde os arquivos estão localizados
         File folder = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
-        // Lista de arquivos .txt na pasta
         File[] files = folder.listFiles();
 
-        // Verificando se a pasta contém arquivos
         ArrayList<Pet> petList = null;
         if (files != null) {
             petList = new ArrayList<>();
 
-            // Iterando sobre os arquivos na pasta
             for (int i = 0; i < files.length; i++) {
-                // Verificando se o arquivo é .txt
                 if (files[i].getName().endsWith(".txt")) {
                     try (BufferedReader br = new BufferedReader(new FileReader(files[i]))) {
                         String nome = br.readLine().split(" - ")[1];    // 1 - Florzinha da Silva
@@ -39,7 +33,6 @@ public class BuscarPet {
                         String peso = br.readLine().split(" - ")[1];     // 6 - 5kg
                         String raca = br.readLine().split(" - ")[1];     // 7 - Siames
 
-                        // Criando o objeto Pet
                         Pet pet = new Pet();
                         PetAddress petAddress = new PetAddress();
 
@@ -55,13 +48,7 @@ public class BuscarPet {
 
 
                         pet.setAddress(petAddress);
-
-                        // arrumar esse try catch
-                        try {
-                            pet.setPetName(nome);
-                        } catch (InvalidPetException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                        pet.setPetName(nome);
                         pet.setPetType(PetType.valueOf(especie.toUpperCase()));
                         pet.setPetGender(PetGender.valueOf(genero.toUpperCase()));
                         pet.setPetAge(Float.parseFloat(idade.split(" ")[0]));
@@ -132,13 +119,12 @@ public class BuscarPet {
 
         if (escolha1 == 1 || escolha2 == 1) {
             System.out.println("Digite o nome ou sobrenome do pet que deseja buscar:");
-            String termoBusca = input.next().trim().toLowerCase();
+            String termoBusca = input.next().toLowerCase().trim();
 
             if (termoBusca.isBlank()) {
                 System.out.println("Nenhum nome digitado! Tente novamente.");
             } else {
                 listaFiltrada = filtraPorNome(termoBusca, listaFiltrada);
-                System.out.println(listaFiltrada);
             }
         }
 
@@ -161,44 +147,40 @@ public class BuscarPet {
                     .filter(pet -> pet.getPetGender() == finalGenEscolha)
                     .toList();
 
-            System.out.println(listaFiltrada);
         }
 
         if (escolha1 == 3 || escolha2 == 3) {
             System.out.print("Digite a idade para buscar: ");
             int idadeBusca = validatorUtils.lerNValido(input);
             listaFiltrada = filtraPorIdade(idadeBusca, listaFiltrada);
-            System.out.println(listaFiltrada);
         }
 
         if (escolha1 == 4 || escolha2 == 4) {
             System.out.print("Digite o peso para buscar: ");
             float pesoBusca = input.nextFloat();
             listaFiltrada = filtraPorPeso(pesoBusca, listaFiltrada);
-            System.out.println(listaFiltrada);
         }
 
         if (escolha1 == 5 || escolha2 == 5) {
             System.out.println("Digite a raça que deseja buscar:");
-            String termoBusca = input.next().trim().toLowerCase(); // Usa next() para capturar a entrada corretamente
+            String buscarRaca = input.next().trim().toLowerCase();
 
-            if (termoBusca.isBlank()) {
+
+            if (buscarRaca.isBlank()) {
                 System.out.println("Nenhuma raça digitada! Tente novamente.");
             } else {
-                listaFiltrada = filtraPorRaca(termoBusca, listaFiltrada);
-                System.out.println(listaFiltrada);
+                listaFiltrada = filtraPorRaca(buscarRaca, listaFiltrada);
             }
         }
 
         if (escolha1 == 6 || escolha2 == 6) {
             System.out.println("Digite o endereço que deseja buscar:");
-            String termoBusca = input.next().trim().toLowerCase(); // Usa next() para capturar a entrada corretamente
+            String buscarAddress = input.next().trim().toLowerCase();
 
-            if (termoBusca.isBlank()) {
+            if (buscarAddress.isBlank()) {
                 System.out.println("Nenhum endereço digitado! Tente novamente.");
             } else {
-                listaFiltrada = filtraPorEndereco(termoBusca, listaFiltrada);
-                System.out.println(listaFiltrada);
+                listaFiltrada = filtraPorEndereco(buscarAddress, listaFiltrada);
             }
         }
 
@@ -207,8 +189,9 @@ public class BuscarPet {
     }
 
     private List<Pet> filtraPorNome(String nomeBuscado, List<Pet> petArrayList){
-        return petArrayList.stream()
-                .filter(pet -> pet.getPetName().contains(nomeBuscado)).toList();
+        List<Pet> newList = petArrayList.stream()
+                .filter(pet -> pet.getPetName().toLowerCase().contains(nomeBuscado)).toList();
+        return newList;
     }
 
     private List<Pet> filtraPorIdade(int idadeBuscada, List<Pet> petArrayList) {
@@ -225,7 +208,7 @@ public class BuscarPet {
 
     private List<Pet> filtraPorRaca(String nomeBuscado, List<Pet> petArrayList) {
         return petArrayList.stream()
-                .filter(pet -> pet.getPetBreed().contains(nomeBuscado)).toList();
+                .filter(pet -> pet.getPetBreed().toLowerCase().contains(nomeBuscado.toLowerCase())).toList();
     }
 
     private List<Pet> filtraPorEndereco(String enderecoBuscado, List<Pet> petArrayList) {

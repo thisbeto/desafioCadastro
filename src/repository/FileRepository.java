@@ -54,10 +54,8 @@ public class FileRepository {
     }
 
     public void savePetFile(Pet pet) {
-        // Formatando o nome do pet para maiúsculas e removendo espaços
         String nomeFormatado = pet.getPetName().replace(" ", "").toUpperCase();
 
-        // Pegando a data e hora atual
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
         String dataHoraFormatada = agora.format(formatter);

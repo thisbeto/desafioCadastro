@@ -53,7 +53,7 @@ public class ExcluirPet {
         Pet petSelecionado = resultadosBusca.get(escolha - 1);
         String nomePetSelecionado = petSelecionado.getPetName().replaceAll("\\s+", "").toUpperCase();
 
-        System.out.println("\n⚠ Tem certeza que deseja excluir o pet '" + petSelecionado.getPetName() + "'? (SIM / NÃO)");
+        System.out.println("\nTem certeza que deseja excluir o pet '" + petSelecionado.getPetName() + "'? (SIM / NÃO)");
         String confirmacao = input.nextLine().trim().toUpperCase();
 
         if (!confirmacao.equals("SIM")) {
@@ -78,6 +78,6 @@ public class ExcluirPet {
             }
         }
 
-        System.out.println("⚠ Arquivo do pet não encontrado para exclusão.");
+        System.out.println("Arquivo do pet não encontrado para exclusão.");
     }
 }

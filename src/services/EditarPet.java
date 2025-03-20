@@ -1,12 +1,10 @@
 package src.services;
 
-import src.exception.InvalidPetException;
 import src.model.Pet;
 import src.repository.FileDelete;
 import src.utils.ValidatorUtils;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -15,7 +13,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EditarPet {
-    public void editarPet(List<Pet> listaFiltrada) throws InvalidPetException {
+    public void editarPet(List<Pet> listaFiltrada) {
         if (listaFiltrada.isEmpty()) {
             System.out.println("Nenhum pet encontrado para editar.");
             return;
@@ -98,7 +96,7 @@ public class EditarPet {
         fileDelete.deletarArquivoAntigo(nomeAntigoPet);
         System.out.println(nomeAntigoPet);
 
-        // Formatando o nome do pet para maiúsculas e removendo espaços
+
         String nomeFormatado = petSelecionado.getPetName().replace(" ", "").toUpperCase();
 
         // Pegando a data e hora atual
