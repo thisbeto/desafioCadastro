@@ -14,11 +14,12 @@ public class Pet {
         return petName;
     }
 
-    public void setPetName(String petName) {
+    public String setPetName(String petName) {
         if (petName == null || petName.trim().isEmpty() || !petName.contains(" ") || !petName.matches("[A-Za-z ]+")) {
             throw new IllegalArgumentException("O pet deve ter um nome e um sobrenome.");
         }
         this.petName = petName;
+        return petName;
     }
 
     public void setPetType(PetType petType) {

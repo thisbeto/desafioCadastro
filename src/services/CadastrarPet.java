@@ -26,20 +26,16 @@ public class CadastrarPet {
         // PERGUNTA 2 - TIPO ANIMAL
         FileRepository.readSpecifyLineFile(2);
         while (true) {
-            try {
-                System.out.println("1 = Cachorro | 2 = Gato");
-                int escolha = validatorUtils.lerNValido(input);
-                if (escolha == 1) {
-                    pet.setPetType(PetType.CACHORRO);
-                    break;
-                } else if (escolha == 2) {
-                    pet.setPetType(PetType.GATO);
-                    break;
-                } else {
-                    System.out.println("Opção inválida! Digite apenas 1 ou 2.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("Erro: Entrada inválida! Digite um número.");
+            System.out.println("1 = Cachorro | 2 = Gato");
+            int escolha = validatorUtils.lerNValido(input);
+            if (escolha == 1) {
+                pet.setPetType(PetType.CACHORRO);
+                break;
+            } else if (escolha == 2) {
+                pet.setPetType(PetType.GATO);
+                break;
+            } else {
+                System.out.println("Opção inválida! Digite apenas 1 ou 2.");
             }
         }
 
@@ -64,58 +60,34 @@ public class CadastrarPet {
         // PERGUNTA 4 - ENDEREÇO ENCONTRADO
         FileRepository.readSpecifyLineFile(4);
         System.out.println("Número da casa: ");
+        petAddress.setHouseNumber(validatorUtils.lerNValido(input));
 
-        try {
-            petAddress.setHouseNumber(validatorUtils.lerNValido(input));
-
-        } catch (InputMismatchException e) {
-            System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
-        }
 
         System.out.println("Cidade: ");
-        try {
-            petAddress.setCity(input.nextLine());
-
-        } catch (InputMismatchException e) {
-            System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
-        }
+        petAddress.setCity(input.nextLine());
 
         System.out.println("Rua: ");
-        try {
-            petAddress.setStreet(input.nextLine());
+        petAddress.setStreet(input.nextLine());
 
-        } catch (InputMismatchException e) {
-            System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
-        }
 
         // PERGUNTA 5 - IDADE APROXIAMDA
         FileRepository.readSpecifyLineFile(5);
-        try {
-            pet.setPetAge(validatorUtils.lerIdadeValido(input));
-        } catch (InputMismatchException e) {
-            System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
-        }
+        pet.setPetAge(validatorUtils.lerIdadeValido(input));
+
 
         // PERGUNTA 6 - PESO
         FileRepository.readSpecifyLineFile(6);
-        try {
-            pet.setPetWeight(validatorUtils.lerPesoValido(input));
-        } catch (IllegalArgumentException | InputMismatchException e) {
-            System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
-        }
+        pet.setPetWeight(validatorUtils.lerPesoValido(input));
+
 
         // PERGUNTA 7 - RAÇA
         FileRepository.readSpecifyLineFile(7);
-        try {
-            input.nextLine();
-            String breed = input.nextLine();
-            pet.setPetBreed(breed);
-        } catch (IllegalArgumentException | InputMismatchException e) {
-            System.out.println("Erro ao cadastrar o pet: " + e.getMessage());
-        }
+        input.nextLine();
+        String breed = input.nextLine();
+        pet.setPetBreed(breed);
+
 
         pet.setAddress(petAddress);
-
         fileRepository.savePetFile(pet);
 
     }

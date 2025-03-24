@@ -1,4 +1,6 @@
 package src.utils;
+import src.model.Pet;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -6,18 +8,12 @@ public class ValidatorUtils {
     public String lerNomeValido(Scanner input) {
         try {
             String nomeFornecido = input.nextLine();
-            return validarNome(nomeFornecido);
+            Pet pet = new Pet();
+            return pet.setPetName(nomeFornecido);
         } catch (IllegalArgumentException e) {
             System.out.println("Erro: " + e.getMessage() + " Tente novamente.");
             return lerNomeValido(input);
         }
-    }
-
-    private String validarNome(String nome) {
-        if (nome == null || nome.trim().isEmpty() || !nome.contains(" ") || !nome.matches("[A-Za-z ]+")) {
-            throw new IllegalArgumentException("O pet deve ter um nome e um sobrenome.");
-        }
-        return nome.trim();
     }
 
     public int lerNValido(Scanner input) {
@@ -27,7 +23,7 @@ public class ValidatorUtils {
             input.nextLine();
             return numValido;
         } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida! Digite um número inteiro.");
+            System.out.println("Entrada inválida! Digite um número valido.");
             input.nextLine();
             return lerNValido(input);
         }

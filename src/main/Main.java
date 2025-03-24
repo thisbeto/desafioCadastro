@@ -5,6 +5,7 @@ import src.repository.FileRepository;
 import src.services.*;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -18,7 +19,7 @@ public class Main {
         BuscarPet buscarPet = new BuscarPet();
         EditarPet editarPet = new EditarPet();
         ExcluirPet excluirPet = new ExcluirPet();
-        List<Pet> pets = buscarPet.buscarPet();
+        ArrayList<Pet> pets = buscarPet.buscarPet();
         do {
             if (option == 1) {
                cadastrarPet.cadastrarPet();
@@ -30,7 +31,7 @@ public class Main {
                 excluirPet.excluirPet(pets);
             }
             if (option == 4) {
-                buscarPet.formatarListaPets(pets);
+                buscarPet.printarListaPets();
             }
             if (option == 5) {
                 editarPet.editarPet(pets);

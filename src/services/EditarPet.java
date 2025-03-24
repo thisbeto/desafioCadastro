@@ -24,7 +24,7 @@ public class EditarPet {
         ValidatorUtils validatorUtils = new ValidatorUtils();
         FileDelete fileDelete = new FileDelete();
 
-        buscarPet.formatarListaPets(listaFiltrada);
+        buscarPet.printarListaPets();
         System.out.print("Digite o número do pet que deseja editar: ");
         int escolhaPetEditar = validatorUtils.lerNValido(input);
 

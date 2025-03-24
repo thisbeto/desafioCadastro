@@ -2,6 +2,7 @@ package src.repository;
 
 
 import src.model.Pet;
+import src.services.BuscarPet;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -55,7 +56,7 @@ public class FileRepository {
 
     public void savePetFile(Pet pet) {
         String nomeFormatado = pet.getPetName().replace(" ", "").toUpperCase();
-
+        BuscarPet buscarPet = new BuscarPet();
         LocalDateTime agora = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
         String dataHoraFormatada = agora.format(formatter);
@@ -94,7 +95,11 @@ public class FileRepository {
             System.out.println("Erro ao criar ou escrever no arquivo: " + e.getMessage());
         }
 
+        System.out.println("Pet salvo! Atualizando lista de pets...");
+        buscarPet.buscarPet();
     }
+
+
 
 
 }

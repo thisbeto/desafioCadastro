@@ -16,6 +16,7 @@ public class BuscarPet {
 
     public ArrayList<Pet> buscarPet() {
         File folder = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
+        folder = new File(folder.getAbsolutePath()); // Força atualização
         File[] files = folder.listFiles();
 
         ArrayList<Pet> petList = null;
@@ -68,7 +69,7 @@ public class BuscarPet {
         return petList;
     }
 
-    public void rodarMenuBusca(){
+    public void rodarMenuBusca() {
         ArrayList<Pet> listaPetsConvertidos;
         ValidatorUtils validatorUtils = new ValidatorUtils();
         List<Pet> listaFiltrada;
@@ -188,7 +189,7 @@ public class BuscarPet {
 
     }
 
-    private List<Pet> filtraPorNome(String nomeBuscado, List<Pet> petArrayList){
+    private List<Pet> filtraPorNome(String nomeBuscado, List<Pet> petArrayList) {
         List<Pet> newList = petArrayList.stream()
                 .filter(pet -> pet.getPetName().toLowerCase().contains(nomeBuscado)).toList();
         return newList;
@@ -242,6 +243,32 @@ public class BuscarPet {
             System.out.println(formattedPet);
         }
     }
-}
 
+        public void printarListaPets() {
+            ArrayList<Pet> listaPetsConvertidos = buscarPet();
+            if (listaPetsConvertidos.isEmpty()) {
+                System.out.println("Nenhum pet encontrado com os critérios selecionados.");
+                return;
+            }
+
+            int contador2 = 1;
+            for (Pet pet : listaPetsConvertidos) {
+                String formattedPet = String.format(
+                        "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
+                        contador2++,
+                        pet.getPetName(),
+                        pet.getPetType(),
+                        pet.getPetGender(),
+                        pet.getAddress().getStreet(),
+                        pet.getAddress().getHouseNumber(),
+                        pet.getAddress().getCity(),
+                        pet.getPetAge(),
+                        pet.getPetWeight(),
+                        pet.getPetBreed()
+                );
+                System.out.println(formattedPet);
+            }
+
+        }
+    }
 
