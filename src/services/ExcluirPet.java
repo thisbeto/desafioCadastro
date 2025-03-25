@@ -2,10 +2,13 @@ package src.services;
 
 import src.model.Pet;
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
 public class ExcluirPet {
+    static Path pathCadastrados = Paths.get("src\\petsCadastrados");
     public void excluirPet(List<Pet> resultadosBusca) {
         Scanner input = new Scanner(System.in);
 
@@ -61,7 +64,7 @@ public class ExcluirPet {
             return;
         }
 
-        File pasta = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
+        File pasta = new File(String.valueOf(pathCadastrados.toAbsolutePath()));
         File[] arquivos = pasta.listFiles();
 
         if (arquivos != null) {

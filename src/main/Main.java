@@ -3,10 +3,7 @@ package src.main;
 import src.model.Pet;
 import src.repository.FileRepository;
 import src.services.*;
-
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,7 +32,6 @@ public class Main {
             }
             if (option == 5) {
                 editarPet.editarPet(pets);
-
             }
             option = printMenu.printarMenuPrincipal();
         } while (option != 6);

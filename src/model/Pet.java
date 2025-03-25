@@ -2,13 +2,13 @@ package src.model;
 
 
 public class Pet {
-    String petName;
-    PetType petType;
-    PetGender petGender;
-    PetAddress address;
-    float petAge;
-    float petWeight;
-    String petBreed;
+    private String petName;
+    private PetType petType;
+    private PetGender petGender;
+    private PetAddress address;
+    private float petAge;
+    private float petWeight;
+    private String petBreed;
 
     public String getPetName() {
         return petName;

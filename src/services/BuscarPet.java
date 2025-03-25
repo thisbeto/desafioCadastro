@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 import src.model.Pet;
@@ -13,9 +15,9 @@ import src.model.PetAddress;
 import src.utils.ValidatorUtils;
 
 public class BuscarPet {
-
+    static Path pathPetCadastrados = Paths.get("src\\petsCadastrados");
     public ArrayList<Pet> buscarPet() {
-        File folder = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
+        File folder = new File(String.valueOf(pathPetCadastrados.toAbsolutePath()));
         folder = new File(folder.getAbsolutePath()); // Força atualização
         File[] files = folder.listFiles();
 
@@ -244,31 +246,31 @@ public class BuscarPet {
         }
     }
 
-        public void printarListaPets() {
-            ArrayList<Pet> listaPetsConvertidos = buscarPet();
-            if (listaPetsConvertidos.isEmpty()) {
-                System.out.println("Nenhum pet encontrado com os critérios selecionados.");
-                return;
-            }
-
-            int contador2 = 1;
-            for (Pet pet : listaPetsConvertidos) {
-                String formattedPet = String.format(
-                        "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
-                        contador2++,
-                        pet.getPetName(),
-                        pet.getPetType(),
-                        pet.getPetGender(),
-                        pet.getAddress().getStreet(),
-                        pet.getAddress().getHouseNumber(),
-                        pet.getAddress().getCity(),
-                        pet.getPetAge(),
-                        pet.getPetWeight(),
-                        pet.getPetBreed()
-                );
-                System.out.println(formattedPet);
-            }
-
+    public void printarListaPets() {
+        ArrayList<Pet> listaPetsConvertidos = buscarPet();
+        if (listaPetsConvertidos.isEmpty()) {
+            System.out.println("Nenhum pet encontrado com os critérios selecionados.");
+            return;
         }
+
+        int contador2 = 1;
+        for (Pet pet : listaPetsConvertidos) {
+            String formattedPet = String.format(
+                    "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
+                    contador2++,
+                    pet.getPetName(),
+                    pet.getPetType(),
+                    pet.getPetGender(),
+                    pet.getAddress().getStreet(),
+                    pet.getAddress().getHouseNumber(),
+                    pet.getAddress().getCity(),
+                    pet.getPetAge(),
+                    pet.getPetWeight(),
+                    pet.getPetBreed()
+            );
+            System.out.println(formattedPet);
+        }
+
     }
+}
 

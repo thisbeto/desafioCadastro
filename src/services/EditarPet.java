@@ -5,14 +5,18 @@ import src.repository.FileDelete;
 import src.utils.ValidatorUtils;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
 public class EditarPet {
+    static Path pathCadastrados = Paths.get("src\\petsCadastrados");
     public void editarPet(List<Pet> listaFiltrada) {
         if (listaFiltrada.isEmpty()) {
             System.out.println("Nenhum pet encontrado para editar.");
@@ -106,8 +110,10 @@ public class EditarPet {
 
         String nomeArquivo = dataHoraFormatada + "-" + nomeFormatado + ".txt";
 
+        File diretorio = new File(String.valueOf(pathCadastrados.toAbsolutePath()));
+        File arquivo = new File(diretorio, nomeArquivo);
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados\\" + nomeArquivo))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
             bw.write("1 - " + petSelecionado.getPetName());
             bw.newLine();
             bw.write("2 - " + petSelecionado.getPetType());

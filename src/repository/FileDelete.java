@@ -1,10 +1,13 @@
 package src.repository;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileDelete {
+    static Path pathCadastrados = Paths.get("src\\petsCadastrados");
     public void deletarArquivoAntigo(String nomeAntigoPet) {
-        File file = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
+        File file = new File(String.valueOf(pathCadastrados.toAbsolutePath()));
         File[] arquivos = file.listFiles();
 
 

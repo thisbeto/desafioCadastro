@@ -6,8 +6,6 @@ import src.model.PetGender;
 import src.model.PetType;
 import src.repository.FileRepository;
 import src.utils.ValidatorUtils;
-
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CadastrarPet {
@@ -62,7 +60,6 @@ public class CadastrarPet {
         System.out.println("Número da casa: ");
         petAddress.setHouseNumber(validatorUtils.lerNValido(input));
 
-
         System.out.println("Cidade: ");
         petAddress.setCity(input.nextLine());
 
@@ -83,8 +80,7 @@ public class CadastrarPet {
         // PERGUNTA 7 - RAÇA
         FileRepository.readSpecifyLineFile(7);
         input.nextLine();
-        String breed = input.nextLine();
-        pet.setPetBreed(breed);
+        pet.setPetBreed(input.nextLine());
 
 
         pet.setAddress(petAddress);

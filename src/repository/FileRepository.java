@@ -5,13 +5,17 @@ import src.model.Pet;
 import src.services.BuscarPet;
 
 import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class FileRepository {
+    static Path pathForm = Paths.get("src\\data\\formulario.txt");
+    static Path pathCadastrar = Paths.get("src\\petsCadastrados");
 
     public void createFile() {
-        java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
+        File file = new File(String.valueOf(pathForm.toAbsolutePath()));
         try (FileWriter fw = new FileWriter(file);
              BufferedWriter bw = new BufferedWriter(fw)) {
             bw.write("1 - Qual o nome e sobrenome do pet?\n2 - Qual o tipo do pet (Cachorro/Gato)\n3 - Qual o sexo do animal?\n4 - Qual endereço e bairro que ele foi encontrado?\n5 - Qual a idade aproximada do pet?\n6 - Qual o peso aproximado do pet?\n7 - Qual a raça do pet?");
@@ -22,7 +26,7 @@ public class FileRepository {
     }
 
     public void readFile() {
-        java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
+        File file = new File(String.valueOf(pathForm.toAbsolutePath()));
         try (FileReader fr = new FileReader(file);
              BufferedReader br = new BufferedReader(fr)) {
             String linha;
@@ -35,7 +39,7 @@ public class FileRepository {
     }
 
     public static String readSpecifyLineFile(int line) {
-        java.io.File file = new java.io.File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\data\\formulario.txt");
+        File file = new File(String.valueOf(pathForm.toAbsolutePath()));
         try (FileReader fr = new FileReader(file);
              BufferedReader br = new BufferedReader(fr)) {
             String linha;
@@ -63,20 +67,18 @@ public class FileRepository {
 
         String nomeArquivo = dataHoraFormatada + "-" + nomeFormatado + ".txt";
 
-        File diretorio = new File("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados");
+        File diretorio = new File(String.valueOf(pathCadastrar.toAbsolutePath()));
+        File arquivo = new File(diretorio, nomeArquivo);
         if (!diretorio.exists()) {
             if (diretorio.mkdirs()) {
                 System.out.println("Diretório criado com sucesso");
             } else {
                 System.out.println("Falha ao criar diretório.");
-                return;
             }
-        } else {
-            System.out.println("");
         }
 
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\Alberto\\Desktop\\Java\\desafioCadastro\\src\\petsCadastrados\\" + nomeArquivo))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
             bw.write("1 - " + pet.getPetName());
             bw.newLine();
             bw.write("2 - " + pet.getPetType());
@@ -98,8 +100,6 @@ public class FileRepository {
         System.out.println("Pet salvo! Atualizando lista de pets...");
         buscarPet.buscarPet();
     }
-
-
 
 
 }
