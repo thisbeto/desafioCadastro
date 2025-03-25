@@ -4,26 +4,26 @@ import src.model.Pet;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ExcluirPet {
     static Path pathCadastrados = Paths.get("src\\petsCadastrados");
-    public void excluirPet(List<Pet> resultadosBusca) {
+    public void excluirPet() {
         Scanner input = new Scanner(System.in);
-
+        BuscarPet buscarPet = new BuscarPet();
+        ArrayList<Pet> resultadosBusca = buscarPet.buscarPet();
         if (resultadosBusca.isEmpty()) {
-            System.out.println("Nenhum pet encontrado.");
+            System.out.println("Nenhum pet encontrado com os critérios selecionados.");
             return;
         }
 
-        // Exibir lista de pets formatada
-        System.out.println("Pets encontrados:");
-        int contador = 1;
+        int contador2 = 1;
         for (Pet pet : resultadosBusca) {
             String formattedPet = String.format(
                     "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
-                    contador++,
+                    contador2++,
                     pet.getPetName(),
                     pet.getPetType(),
                     pet.getPetGender(),

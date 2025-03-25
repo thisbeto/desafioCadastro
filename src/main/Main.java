@@ -25,7 +25,7 @@ public class Main {
                 buscarPet.rodarMenuBusca();
             }
             if (option == 3) {
-                excluirPet.excluirPet(pets);
+                excluirPet.excluirPet();
             }
             if (option == 4) {
                 buscarPet.printarListaPets();

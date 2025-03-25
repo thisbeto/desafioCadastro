@@ -20,39 +20,15 @@ public class CadastrarPet {
         FileRepository.readSpecifyLineFile(1);
         pet.setPetName(validatorUtils.lerNomeValido(input));
 
-
         // PERGUNTA 2 - TIPO ANIMAL
         FileRepository.readSpecifyLineFile(2);
-        while (true) {
-            System.out.println("1 = Cachorro | 2 = Gato");
-            int escolha = validatorUtils.lerNValido(input);
-            if (escolha == 1) {
-                pet.setPetType(PetType.CACHORRO);
-                break;
-            } else if (escolha == 2) {
-                pet.setPetType(PetType.GATO);
-                break;
-            } else {
-                System.out.println("Opção inválida! Digite apenas 1 ou 2.");
-            }
-        }
+        System.out.println("1 = Cachorro | 2 = Gato");
+        pet.setPetTypeChoose(validatorUtils.lerUmOuDoisValido(input));
 
         // PERGUNTA 3 - GENERO ANIMAL
         FileRepository.readSpecifyLineFile(3);
-        while (true) {
-            System.out.println("1 = Macho | 2 = Fêmea");
-            int escolha = validatorUtils.lerNValido(input);
-
-            if (escolha == 1) {
-                pet.setPetGender(PetGender.MACHO);
-                break;
-            } else if (escolha == 2) {
-                pet.setPetGender(PetGender.FEMEA);
-                break;
-            } else {
-                System.out.println("Opção inválida! Digite apenas 1 ou 2.");
-            }
-        }
+        System.out.println("1 = Macho | 2 = Fêmea");
+        pet.setPetGenderChoose(validatorUtils.lerUmOuDoisValido(input));
 
 
         // PERGUNTA 4 - ENDEREÇO ENCONTRADO

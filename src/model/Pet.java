@@ -1,6 +1,5 @@
 package src.model;
 
-
 public class Pet {
     private String petName;
     private PetType petType;
@@ -20,6 +19,16 @@ public class Pet {
         }
         this.petName = petName;
         return petName;
+    }
+
+    public void setPetTypeChoose(int escolha) {
+        if (escolha == 1) {
+            setPetType(PetType.CACHORRO);
+        } if (escolha == 2) {
+            setPetType(PetType.GATO);
+        } else {
+            System.out.println("Opção inválida! Digite apenas 1 ou 2.");
+        }
     }
 
     public void setPetType(PetType petType) {
@@ -48,6 +57,16 @@ public class Pet {
 
     public void setPetWeight(float petWeight) {
         this.petWeight = petWeight;
+    }
+
+    public void setPetGenderChoose(int escolha) {
+        if (escolha == 1) {
+            setPetGender(PetGender.MACHO);
+        } if (escolha == 2) {
+            setPetGender(PetGender.FEMEA);
+        } else {
+            System.out.println("Opção inválida! Digite apenas 1 ou 2.");
+        }
     }
 
     public void setPetGender(PetGender petGender) {

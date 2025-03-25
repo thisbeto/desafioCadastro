@@ -16,6 +16,26 @@ public class ValidatorUtils {
         }
     }
 
+    public int lerUmOuDoisValido(Scanner input) {
+        try {
+            System.out.print("Digite um número: ");
+            int numValido = input.nextInt();
+            if (numValido == 1 || numValido == 2) {
+                input.nextLine();
+                return numValido;
+            } else {
+                System.out.println("Entrada inválida! Digite um número valido. CAI NESSA");
+                return lerUmOuDoisValido(input);
+            }
+
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada inválida! Digite um número valido NAO CAI AQ.");
+            input.nextLine();
+            return lerUmOuDoisValido(input);
+        }
+    }
+
+
     public int lerNValido(Scanner input) {
         try {
             System.out.print("Digite um número: ");
@@ -28,6 +48,7 @@ public class ValidatorUtils {
             return lerNValido(input);
         }
     }
+
 
     public float lerIdadeValido(Scanner input) {
         try {
