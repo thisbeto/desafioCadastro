@@ -31,7 +31,7 @@ public class Main {
                 buscarPet.printarListaPets();
             }
             if (option == 5) {
-                editarPet.editarPet(pets);
+                editarPet.editarPet();
             }
             option = printMenu.printarMenuPrincipal();
         } while (option != 6);

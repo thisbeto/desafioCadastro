@@ -14,30 +14,9 @@ public class ExcluirPet {
         Scanner input = new Scanner(System.in);
         BuscarPet buscarPet = new BuscarPet();
         ArrayList<Pet> resultadosBusca = buscarPet.buscarPet();
-        if (resultadosBusca.isEmpty()) {
-            System.out.println("Nenhum pet encontrado com os critérios selecionados.");
-            return;
-        }
 
-        int contador2 = 1;
-        for (Pet pet : resultadosBusca) {
-            String formattedPet = String.format(
-                    "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
-                    contador2++,
-                    pet.getPetName(),
-                    pet.getPetType(),
-                    pet.getPetGender(),
-                    pet.getAddress().getStreet(),
-                    pet.getAddress().getHouseNumber(),
-                    pet.getAddress().getCity(),
-                    pet.getPetAge(),
-                    pet.getPetWeight(),
-                    pet.getPetBreed()
-            );
-            System.out.println(formattedPet);
-        }
+        buscarPet.formatarListaPets(resultadosBusca);
 
-        // Solicitar escolha do usuário
         int escolha = -1;
         while (escolha < 1 || escolha > resultadosBusca.size()) {
             System.out.print("\nDigite o número do pet que deseja deletar: ");

@@ -12,19 +12,21 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class EditarPet {
     static Path pathCadastrados = Paths.get("src\\petsCadastrados");
-    public void editarPet(List<Pet> listaFiltrada) {
+    public void editarPet() {
+        BuscarPet buscarPet = new BuscarPet();
+        ArrayList<Pet> listaFiltrada = buscarPet.buscarPet();
         if (listaFiltrada.isEmpty()) {
             System.out.println("Nenhum pet encontrado para editar.");
             return;
         }
 
         Scanner input = new Scanner(System.in);
-        BuscarPet buscarPet = new BuscarPet();
         ValidatorUtils validatorUtils = new ValidatorUtils();
         FileDelete fileDelete = new FileDelete();
 
@@ -34,7 +36,7 @@ public class EditarPet {
 
         if (escolhaPetEditar < 1 || escolhaPetEditar > listaFiltrada.size()) {
             System.out.println("Número inválido! Tente novamente.\n");
-            editarPet(listaFiltrada);
+            editarPet();
         }
 
         Pet petSelecionado = listaFiltrada.get(escolhaPetEditar - 1);

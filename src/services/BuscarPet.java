@@ -83,25 +83,11 @@ public class BuscarPet {
         int escolhaUsuario = validatorUtils.lerNValido(input);
 
         System.out.println("Escolha um critério para filtrar os pets:");
-        System.out.println("1 - Nome ou Sobrenome");
-        System.out.println("2 - Sexo");
-        System.out.println("3 - Idade");
-        System.out.println("4 - Peso");
-        System.out.println("5 - Raça");
-        System.out.println("6 - Endereço");
-        System.out.println("0 - Nenhuma outra");
-        System.out.print("Opção: ");
+        opcoesCriterios();
         int escolha1 = validatorUtils.lerNValido(input);
 
         System.out.println("Escolha um segundo critério para filtrar os pets:");
-        System.out.println("1 - Nome ou Sobrenome");
-        System.out.println("2 - Sexo");
-        System.out.println("3 - Idade");
-        System.out.println("4 - Peso");
-        System.out.println("5 - Raça");
-        System.out.println("6 - Endereço");
-        System.out.println("0 - Nenhuma outra");
-        System.out.print("Opção: ");
+        opcoesCriterios();
         int escolha2 = validatorUtils.lerNValido(input);
 
         PetType tipoEscolhido = null;
@@ -221,15 +207,30 @@ public class BuscarPet {
                 .toList();
     }
 
-    public void formatarListaPets(List<Pet> listaFiltrada) {
-        if (listaFiltrada.isEmpty()) {
+    private void opcoesCriterios(){
+        System.out.println("1 - Nome ou Sobrenome");
+        System.out.println("2 - Sexo");
+        System.out.println("3 - Idade");
+        System.out.println("4 - Peso");
+        System.out.println("5 - Raça");
+        System.out.println("6 - Endereço");
+        System.out.println("0 - Nenhuma outra");
+        System.out.print("Opção: ");
+    }
+
+    public void formatarListaPets(List<Pet> listaPets) {
+        if (listaPets == null) {
+            listaPets = buscarPet();
+        }
+
+        if (listaPets.isEmpty()) {
             System.out.println("Nenhum pet encontrado com os critérios selecionados.");
             return;
         }
 
         int contador = 1;
-        for (Pet pet : listaFiltrada) {
-            String formattedPet = String.format(
+        for (Pet pet : listaPets) {
+            System.out.println(String.format(
                     "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
                     contador++,
                     pet.getPetName(),
@@ -241,36 +242,12 @@ public class BuscarPet {
                     pet.getPetAge(),
                     pet.getPetWeight(),
                     pet.getPetBreed()
-            );
-            System.out.println(formattedPet);
+            ));
         }
     }
 
     public void printarListaPets() {
-        ArrayList<Pet> listaPetsConvertidos = buscarPet();
-        if (listaPetsConvertidos.isEmpty()) {
-            System.out.println("Nenhum pet encontrado com os critérios selecionados.");
-            return;
-        }
-
-        int contador2 = 1;
-        for (Pet pet : listaPetsConvertidos) {
-            String formattedPet = String.format(
-                    "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
-                    contador2++,
-                    pet.getPetName(),
-                    pet.getPetType(),
-                    pet.getPetGender(),
-                    pet.getAddress().getStreet(),
-                    pet.getAddress().getHouseNumber(),
-                    pet.getAddress().getCity(),
-                    pet.getPetAge(),
-                    pet.getPetWeight(),
-                    pet.getPetBreed()
-            );
-            System.out.println(formattedPet);
-        }
-
+        formatarListaPets(null);
     }
 }
 
