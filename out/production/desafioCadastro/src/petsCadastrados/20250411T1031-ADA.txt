@@ -1,0 +1,7 @@
+1 - ad a
+2 - Cachorro
+3 - Femea
+4 - ad, 12, ad
+5 - 12.0 anos
+6 - 20 kg
+7 - Nao Informado

@@ -1,16 +1,16 @@
 package src.model;
 
 public class PetAddress {
-    public int houseNumber;
+    public String houseNumber;
     public String city;
     public String street;
 
 
-    public int getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(int houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 

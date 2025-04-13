@@ -2,8 +2,6 @@ package src.services;
 
 import src.model.Pet;
 import src.model.PetAddress;
-import src.model.PetGender;
-import src.model.PetType;
 import src.repository.FileRepository;
 import src.utils.ValidatorUtils;
 import java.util.Scanner;
@@ -12,7 +10,6 @@ public class CadastrarPet {
     public void cadastrarPet() {
         Scanner input = new Scanner(System.in);
         Pet pet = new Pet();
-        FileRepository fileRepository = new FileRepository();
         PetAddress petAddress = new PetAddress();
         ValidatorUtils validatorUtils = new ValidatorUtils();
 
@@ -34,7 +31,7 @@ public class CadastrarPet {
         // PERGUNTA 4 - ENDEREÇO ENCONTRADO
         FileRepository.readSpecifyLineFile(4);
         System.out.println("Número da casa: ");
-        petAddress.setHouseNumber(validatorUtils.lerNValido(input));
+        petAddress.setHouseNumber(validatorUtils.lerNumeroCasaValido(input));
 
         System.out.println("Cidade: ");
         petAddress.setCity(input.nextLine());
@@ -47,11 +44,9 @@ public class CadastrarPet {
         FileRepository.readSpecifyLineFile(5);
         pet.setPetAge(validatorUtils.lerIdadeValido(input));
 
-
         // PERGUNTA 6 - PESO
         FileRepository.readSpecifyLineFile(6);
         pet.setPetWeight(validatorUtils.lerPesoValido(input));
-
 
         // PERGUNTA 7 - RAÇA
         FileRepository.readSpecifyLineFile(7);
@@ -60,7 +55,7 @@ public class CadastrarPet {
 
 
         pet.setAddress(petAddress);
-        fileRepository.savePetFile(pet);
+        pet.savePetFile();
 
     }
 

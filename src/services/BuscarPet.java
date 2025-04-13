@@ -18,10 +18,12 @@ public class BuscarPet {
     static Path pathPetCadastrados = Paths.get("src\\petsCadastrados");
     public ArrayList<Pet> buscarPet() {
         File folder = new File(String.valueOf(pathPetCadastrados.toAbsolutePath()));
-        folder = new File(folder.getAbsolutePath()); // Força atualização
+        folder = new File(folder.getAbsolutePath());
         File[] files = folder.listFiles();
 
         ArrayList<Pet> petList = null;
+
+
         if (files != null) {
             petList = new ArrayList<>();
 
@@ -39,23 +41,18 @@ public class BuscarPet {
                         Pet pet = new Pet();
                         PetAddress petAddress = new PetAddress();
 
-                        // resumir essas linhas de endereço
-                        String[] enderecoParts = endereco.split(",");  // Divide a string em partes
-                        String street = enderecoParts[0].trim();       // Nome da rua
-                        int houseNumber = Integer.parseInt(enderecoParts[1].trim()); // Número da casa
-                        String city = enderecoParts[2].trim();         // Cidade
-
-                        petAddress.setStreet(street);
-                        petAddress.setHouseNumber(houseNumber);
-                        petAddress.setCity(city);
+                        String[] enderecoParts = endereco.split(",");
+                        petAddress.setStreet(enderecoParts[0].trim());
+                        petAddress.setHouseNumber(enderecoParts[1].trim());
+                        petAddress.setCity(enderecoParts[2].trim());
 
 
                         pet.setAddress(petAddress);
                         pet.setPetName(nome);
                         pet.setPetType(PetType.valueOf(especie.toUpperCase()));
                         pet.setPetGender(PetGender.valueOf(genero.toUpperCase()));
-                        pet.setPetAge(Float.parseFloat(idade.split(" ")[0]));
-                        pet.setPetWeight(Float.parseFloat(peso.split("kg")[0].trim()));
+                        pet.setPetAge(idade.split(" ")[0]);
+                        pet.setPetWeight(peso.split("kg")[0].trim());
                         pet.setPetBreed(raca);
 
                         petList.add(pet);
@@ -183,15 +180,28 @@ public class BuscarPet {
         return newList;
     }
 
+
     private List<Pet> filtraPorIdade(int idadeBuscada, List<Pet> petArrayList) {
         return petArrayList.stream()
-                .filter(pet -> pet.getPetAge() == idadeBuscada)
+                .filter(pet -> {
+                    try {
+                        return Integer.parseInt(pet.getPetAge()) == idadeBuscada;
+                    } catch (NumberFormatException e) {
+                        return false;
+                    }
+                })
                 .toList();
     }
 
     private List<Pet> filtraPorPeso(double pesoBuscado, List<Pet> petArrayList) {
         return petArrayList.stream()
-                .filter(pet -> pet.getPetWeight() == pesoBuscado)
+                .filter(pet -> {
+                    try {
+                        return Double.parseDouble(pet.getPetWeight()) == pesoBuscado;
+                    } catch (NumberFormatException e) {
+                        return false;
+                    }
+                })
                 .toList();
     }
 
@@ -231,7 +241,7 @@ public class BuscarPet {
         int contador = 1;
         for (Pet pet : listaPets) {
             System.out.println(String.format(
-                    "%d. %s - %s - %s - %s, %d - %s - %.0f anos - %.1fkg - %s",
+                    "%d. %s - %s - %s - %s, %s - %s - %s anos - %s kg - %s",
                     contador++,
                     pet.getPetName(),
                     pet.getPetType(),

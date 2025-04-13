@@ -1,18 +1,11 @@
 package src.repository;
-
-
-import src.model.Pet;
-import src.services.BuscarPet;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
 
 public class FileRepository {
     static Path pathForm = Paths.get("src\\data\\formulario.txt");
-    static Path pathCadastrar = Paths.get("src\\petsCadastrados");
 
     public void createFile() {
         File file = new File(String.valueOf(pathForm.toAbsolutePath()));
@@ -58,48 +51,6 @@ public class FileRepository {
         }
     }
 
-    public void savePetFile(Pet pet) {
-        String nomeFormatado = pet.getPetName().replace(" ", "").toUpperCase();
-        BuscarPet buscarPet = new BuscarPet();
-        LocalDateTime agora = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmm");
-        String dataHoraFormatada = agora.format(formatter);
-
-        String nomeArquivo = dataHoraFormatada + "-" + nomeFormatado + ".txt";
-
-        File diretorio = new File(String.valueOf(pathCadastrar.toAbsolutePath()));
-        File arquivo = new File(diretorio, nomeArquivo);
-        if (!diretorio.exists()) {
-            if (diretorio.mkdirs()) {
-                System.out.println("Diretório criado com sucesso");
-            } else {
-                System.out.println("Falha ao criar diretório.");
-            }
-        }
-
-
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
-            bw.write("1 - " + pet.getPetName());
-            bw.newLine();
-            bw.write("2 - " + pet.getPetType());
-            bw.newLine();
-            bw.write("3 - " + pet.getPetGender());
-            bw.newLine();
-            bw.write("4 - " + pet.getAddress().getStreet() + ", " + pet.getAddress().getHouseNumber() + ", " + pet.getAddress().getCity());
-            bw.newLine();
-            bw.write("5 - " + pet.getPetAge() + " anos");
-            bw.newLine();
-            bw.write("6 - " + pet.getPetWeight() + "kg");
-            bw.newLine();
-            bw.write("7 - " + pet.getPetBreed());
-            bw.newLine();
-        } catch (IOException e) {
-            System.out.println("Erro ao criar ou escrever no arquivo: " + e.getMessage());
-        }
-
-        System.out.println("Pet salvo! Atualizando lista de pets...");
-        buscarPet.buscarPet();
-    }
 
 
 }

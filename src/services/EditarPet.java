@@ -60,29 +60,29 @@ public class EditarPet {
         if (!novoEndereco.isBlank()) {
             String[] partes = novoEndereco.split(",");
             petSelecionado.getAddress().setStreet(partes[0].trim());
-            petSelecionado.getAddress().setHouseNumber(Integer.parseInt(partes[1].trim()));
+            petSelecionado.getAddress().setHouseNumber(partes[1].trim());
             petSelecionado.getAddress().setCity(partes[2].trim());
         }
 
         System.out.print("Nova idade (anos) ou pressione Enter para manter: ");
-        String novaIdade = input.nextLine();
+        String novaIdade = validatorUtils.lerIdadeValido(input);
 
 
         if (novaIdade.isBlank()) {
             System.out.println("Idade mantida: " + petSelecionado.getPetAge() + " anos");
         } else {
-            petSelecionado.setPetAge(Float.parseFloat(novaIdade));
+            petSelecionado.setPetAge(novaIdade);
             System.out.println("Idade atualizada para: " + novaIdade + " anos");
         }
 
         System.out.print("Novo peso (kg) ou pressione Enter para manter: ");
-        String novoPeso = input.nextLine();
-
+        String novoPeso = validatorUtils.lerPesoValido(input);
 
         if (novoPeso.isBlank()) {
             System.out.println("Peso mantido: " + petSelecionado.getPetWeight() + " kg");
         } else {
-            petSelecionado.setPetWeight(Float.parseFloat(novoPeso));
+            //petSelecionado.setPetWeight(Float.parseFloat(novoPeso));
+            petSelecionado.setPetWeight(novoPeso);
             System.out.println("Peso atualizado para: " + novoPeso + " kg");
         }
 

@@ -1,10 +1,13 @@
 package src.utils;
+
 import src.model.Pet;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class ValidatorUtils {
+    public static final String NAO_INFORMADO = "Nao Informado";
+
     public String lerNomeValido(Scanner input) {
         try {
             String nomeFornecido = input.nextLine();
@@ -24,12 +27,12 @@ public class ValidatorUtils {
                 input.nextLine();
                 return numValido;
             } else {
-                System.out.println("Entrada inválida! Digite um número valido. CAI NESSA");
+                System.out.println("Entrada inválida! Digite um número valido.");
                 return lerUmOuDoisValido(input);
             }
 
         } catch (InputMismatchException e) {
-            System.out.println("Entrada inválida! Digite um número valido NAO CAI AQ.");
+            System.out.println("Entrada inválida! Digite um número valido.");
             input.nextLine();
             return lerUmOuDoisValido(input);
         }
@@ -49,48 +52,65 @@ public class ValidatorUtils {
         }
     }
 
+    public String lerNumeroCasaValido(Scanner input) {
+        System.out.print("Digite o número da casa: ");
+        String entrada = input.nextLine().trim();
 
-    public float lerIdadeValido(Scanner input) {
-        try {
-            if (input.hasNextFloat()) {
-                float numValido = input.nextFloat();
-                if (numValido <= 0) {
-                    System.out.println("Idade inválida. Deve ser maior que 0.");
-                    return lerIdadeValido(input);
-                } else if (numValido > 20) {
-                    System.out.println("Idade inválida. Deve ser menor ou igual a 20.");
-                    return lerIdadeValido(input);
-                }
-                return numValido;
-            } else {
-                System.out.println("Erro: Entrada inválida! Digite um número.");
-                input.nextLine();
-                return lerIdadeValido(input);
-            }
+        if (entrada.isEmpty()) {
+            return Pet.NAO_INFORMADO;
+        }
 
-        } catch (InputMismatchException e) {
-            System.out.println("Erro: Entrada inválida! Digite um número.");
-            return lerIdadeValido(input);
+        if (entrada.matches("\\d+")) {
+            return entrada;
+        } else {
+            System.out.println("Entrada inválida! Digite apenas números ou pressione Enter para deixar como 'Não Informado'.");
+            return lerNumeroCasaValido(input);
         }
     }
 
-    public float lerPesoValido(Scanner input) {
-        try {
-            if (input.hasNextFloat()) {
-                float numValido = input.nextFloat();
+
+    public String lerIdadeValido(Scanner input) {
+        while (true) {
+            String entrada = input.nextLine();
+
+            if (entrada.trim().isEmpty()) {
+                return Pet.NAO_INFORMADO;
+            }
+
+            try {
+                float idade = Float.parseFloat(entrada);
+                if (idade <= 0 || idade > 20) {
+                    throw new IllegalArgumentException("Idade inválida. Deve estar entre 1 e 20.");
+                }
+                return String.valueOf(idade);
+            } catch (NumberFormatException e) {
+                System.out.println("Erro: Entrada inválida! Digite um número.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+
+    public String lerPesoValido(Scanner input) {
+        while (true) {
+            String entrada = input.nextLine();
+
+            if (entrada.trim().isEmpty()) {
+                return Pet.NAO_INFORMADO;
+            }
+
+            try {
+                float numValido = Float.parseFloat(entrada);
                 if (numValido <= 0 || numValido > 60) {
                     throw new IllegalArgumentException("Peso inválido. Deve ser maior que 0kg e menor ou igual a 60kg.");
                 }
-                return numValido;
-            } else {
+                return String.valueOf(numValido);
+            } catch (NumberFormatException e) {
                 System.out.println("Erro: Entrada inválida! Digite um número.");
-                input.nextLine();
-                return lerPesoValido(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
-
-        } catch (InputMismatchException | IllegalArgumentException e) {
-            System.out.println("Erro: Entrada inválida! Digite um número.");
-            return lerIdadeValido(input);
         }
     }
 }
